@@ -1,0 +1,54 @@
+class Node {
+    int data;
+    Node prev;
+    Node next;
+
+    Node(int data) {
+        this.data = data;
+        this.prev = null;
+        this.next = null;
+    }
+}
+
+public class Main {
+    Node head;
+
+    // Insert at beginning
+    void insertAtBeginning(int data) {
+        Node newNode = new Node(data);
+
+        // If list is not empty
+        if (head != null) {
+            newNode.next = head;
+            head.prev = newNode;
+        }
+
+        // Make new node the head
+        head = newNode;
+    }
+
+    // Display forward
+    void display() {
+        Node temp = head;
+
+        while (temp != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+    }
+
+    public static void main(String[] args) {
+        Main list = new Main();
+
+        list.insertAtBeginning(30);
+        list.insertAtBeginning(20);
+        list.insertAtBeginning(10);
+
+        System.out.println("Doubly Linked List:");
+        list.display();
+    }
+}
+
+Output:
+Double Linked List:
+10 20 30 
