@@ -1,0 +1,93 @@
+class Node {
+    int data;
+    Node prev;
+    Node next;
+
+    Node(int data) {
+        this.data = data;
+    }
+}
+
+public class Main {
+    Node head = null;
+
+    // Insert at end
+    void insert(int data) {
+        Node newNode = new Node(data);
+
+        if (head == null) {
+            head = newNode;
+
+            // Circular connection
+            head.next = head;
+            head.prev = head;
+
+            return;
+        }
+
+        Node last = head.prev;
+
+        // Connect new node
+        newNode.next = head;
+        newNode.prev = last;
+
+        // Update old last node
+        last.next = newNode;
+
+        // Update head's previous
+        head.prev = newNode;
+    }
+
+    // Display forward
+    void displayForward() {
+        if (head == null) {
+            return;
+        }
+
+        Node temp = head;
+
+        do {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        } while (temp != head);
+
+        System.out.println();
+    }
+
+    // Display backward
+    void displayBackward() {
+        if (head == null) {
+            return;
+        }
+
+        Node temp = head.prev;
+
+        do {
+            System.out.print(temp.data + " ");
+            temp = temp.prev;
+        } while (temp != head.prev);
+
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        Main list = new Main();
+
+        list.insert(10);
+        list.insert(20);
+        list.insert(30);
+        list.insert(40);
+
+        System.out.println("Forward:");
+        list.displayForward();
+
+        System.out.println("Backward:");
+        list.displayBackward();
+    }
+}
+
+output:
+Forward:
+10 20 30 40 
+Backward:
+40 30 20 10 
